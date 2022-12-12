@@ -21,7 +21,8 @@ class Animal(Base):
     name = Column(String)
     habitat = Column(String)
     logs = relationship("Logbook", back_populates="animal",
-                        cascade="all,delete, delete-orphan")
+                        cascade="all, delete, delete-orphan")#delete(deletes all logs from animal thru the foreign key)
+                        #
 
 
     def __repr__(self):
@@ -41,13 +42,13 @@ class Logbook(Base):
     notes = Column(String)
     animal = relationship("Animal", back_populates="logs")
 
+
     def __repr__(self):
         return f'''
                 \nLogbook: {self.id}\r
                 Animal ID = {self.animal_id}\r
                 Notes = {self.notes}
             '''
-
 
 
 if __name__ == "__main__":
